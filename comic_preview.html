@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ title }} - ComicCraft
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+
+<body>
+
+<main class="container wide">
+
+
+    <div class="topbar">
+
+        <a
+            class="button secondary"
+            href="/"
+        >
+            ← New Comic
+        </a>
+
+
+        <a
+            class="button"
+            href="{{ pdf_path }}"
+            download
+        >
+            Download PDF
+        </a>
+
+    </div>
+
+
+    <h1>
+        {{ title }}
+    </h1>
+
+
+    <p class="muted">
+        Your five-panel AI comic preview
+    </p>
+
+
+    {% for panel in layout %}
+
+
+    <article class="comic-panel card">
+
+
+        <div class="panel-header">
+
+            <span>
+                Panel {{ panel.panel_number }}
+            </span>
+
+            <h2>
+                {{ panel.title }}
+            </h2>
+
+        </div>
+
+
+        {% if panel.image_path %}
+
+        <img
+            class="comic-image"
+            src="{{ panel.image_path }}"
+            alt="Comic panel {{ panel.panel_number }}"
+        >
+
+        {% endif %}
+
+
+        <p class="scene">
+
+            {{ panel.scene_description }}
+
+        </p>
+
+
+        {% if panel.caption %}
+
+        <p>
+
+            <strong>
+                Caption:
+            </strong>
+
+            {{ panel.caption }}
+
+        </p>
+
+        {% endif %}
+
+
+        {% if panel.narration %}
+
+        <p>
+
+            <strong>
+                Narration:
+            </strong>
+
+            {{ panel.narration }}
+
+        </p>
+
+        {% endif %}
+
+
+        {% if panel.dialogue %}
+
+        <p class="dialogue">
+
+            <strong>
+                Dialogue:
+            </strong>
+
+            {{ panel.dialogue }}
+
+        </p>
+
+        {% endif %}
+
+
+        <details>
+
+            <summary>
+                Image prompt
+            </summary>
+
+            <p class="muted">
+
+                {{ panel.image_prompt }}
+
+            </p>
+
+        </details>
+
+
+    </article>
+
+
+    {% endfor %}
+
+
+    <div class="center">
+
+        <a
+            class="button"
+            href="/export-success"
+        >
+            Finish
+        </a>
+
+    </div>
+
+
+</main>
+
+</body>
+
+</html>
